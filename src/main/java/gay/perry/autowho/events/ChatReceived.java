@@ -15,13 +15,6 @@ public class ChatReceived {
             }
         }
 
-        // AutoGL for Duels
-        if (!event.getMessage().getUnformattedText().contains(":")) {
-            if (event.getMessage().getUnformattedText().contains("Eliminate your opponents!")) {
-                Minecraft.getMinecraft().thePlayer.sendChatMessage("/ac Good Luck, have fun.");
-            }
-        }
-
         // Lilith stats checking support for normal Duels
         if (event.getMessage().getUnformattedText().contains("Opponent: ")) {
             String message1 = event.getMessage().getUnformattedText();
