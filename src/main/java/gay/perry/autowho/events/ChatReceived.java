@@ -4,14 +4,20 @@ import net.minecraft.client.Minecraft;
 import net.weavemc.loader.api.event.ChatReceivedEvent;
 import net.weavemc.loader.api.event.SubscribeEvent;
 
+import java.util.concurrent.Executors;
+
 public class ChatReceived {
 
     @SubscribeEvent
-    public void onChatMessage(ChatReceivedEvent event) throws InterruptedException {
+    public void onChatMessage(ChatReceivedEvent event) {
         if (!event.getMessage().getUnformattedText().contains(":")) {
             if (event.getMessage().getUnformattedText().contains("Protect your bed and destroy the enemy beds.")) {
-                Thread.sleep(1000);
-                Minecraft.getMinecraft().thePlayer.sendChatMessage("/who");
+                Executors.newSingleThreadExecutor().execute(()->{
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ignored) {}
+                    Minecraft.getMinecraft().thePlayer.sendChatMessage("/who");
+                });
             }
         }
 
